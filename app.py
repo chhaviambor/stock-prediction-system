@@ -26,46 +26,124 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Custom CSS for beautiful UI
+# Custom CSS for enhanced dark UI
 st.markdown("""
     <style>
-    .main {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+    
+    * {
+        font-family: 'Poppins', sans-serif;
     }
+    
     .stApp {
-        background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+        background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 50%, #0f1419 100%);
     }
+    
+    .main {
+        background: transparent;
+    }
+    
     h1 {
-        color: #00FFAA;
+        background: linear-gradient(135deg, #00f2fe 0%, #4facfe 50%, #00f2fe 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
         text-align: center;
-        font-size: 3em;
-        text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        padding: 20px;
+        font-size: 3.5em;
+        font-weight: 700;
+        padding: 30px 20px;
+        margin-bottom: 20px;
+        text-shadow: 0 0 30px rgba(0, 242, 254, 0.3);
     }
-    h2, h3 {
-        color: #FFFFFF;
-        text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+    
+    h2 {
+        color: #00f2fe;
+        font-weight: 600;
+        text-shadow: 0 0 10px rgba(0, 242, 254, 0.3);
+        margin-top: 30px;
     }
+    
+    h3 {
+        color: #4facfe;
+        font-weight: 500;
+    }
+    
     .stButton>button {
-        background: linear-gradient(90deg, #00FFAA 0%, #00D4FF 100%);
-        color: #000000;
-        font-weight: bold;
-        border-radius: 10px;
-        border: none;
-        padding: 10px 25px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: #FFFFFF;
+        font-weight: 600;
+        border-radius: 12px;
+        border: 2px solid rgba(102, 126, 234, 0.3);
+        padding: 12px 30px;
         font-size: 16px;
-        transition: all 0.3s;
+        transition: all 0.4s ease;
+        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
     }
+    
     .stButton>button:hover {
-        transform: scale(1.05);
-        box-shadow: 0 5px 15px rgba(0,255,170,0.4);
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(102, 126, 234, 0.6);
+        border-color: rgba(102, 126, 234, 0.8);
     }
-    .metric-card {
-        background: rgba(255,255,255,0.1);
+    
+    .stMetric {
+        background: linear-gradient(135deg, rgba(26, 31, 58, 0.8) 0%, rgba(15, 20, 25, 0.8) 100%);
         padding: 20px;
+        border-radius: 15px;
+        border: 1px solid rgba(0, 242, 254, 0.2);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+    
+    .stMetric label {
+        color: #4facfe !important;
+        font-weight: 500;
+    }
+    
+    .stMetric [data-testid="stMetricValue"] {
+        color: #00f2fe;
+        font-weight: 600;
+    }
+    
+    div[data-testid="stExpander"] {
+        background: linear-gradient(135deg, rgba(26, 31, 58, 0.6) 0%, rgba(15, 20, 25, 0.6) 100%);
+        border: 1px solid rgba(0, 242, 254, 0.2);
+        border-radius: 12px;
+    }
+    
+    .sidebar .sidebar-content {
+        background: linear-gradient(135deg, #0f1419 0%, #1a1f3a 100%);
+    }
+    
+    input, textarea, select {
+        background-color: rgba(26, 31, 58, 0.8) !important;
+        color: #FFFFFF !important;
+        border: 1px solid rgba(0, 242, 254, 0.3) !important;
+        border-radius: 8px !important;
+    }
+    
+    input:focus, textarea:focus, select:focus {
+        border-color: rgba(0, 242, 254, 0.6) !important;
+        box-shadow: 0 0 10px rgba(0, 242, 254, 0.3) !important;
+    }
+    
+    [data-testid="stSidebar"] {
+        background: linear-gradient(180deg, #0a0e27 0%, #1a1f3a 100%);
+        border-right: 1px solid rgba(0, 242, 254, 0.1);
+    }
+    
+    [data-testid="stSidebar"] h3 {
+        color: #00f2fe;
+    }
+    
+    hr {
+        border-color: rgba(0, 242, 254, 0.2);
+        margin: 30px 0;
+    }
+    
+    .stAlert {
+        background: linear-gradient(135deg, rgba(26, 31, 58, 0.9) 0%, rgba(15, 20, 25, 0.9) 100%);
+        border: 1px solid rgba(0, 242, 254, 0.3);
         border-radius: 10px;
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(255,255,255,0.2);
     }
     </style>
 """, unsafe_allow_html=True)
@@ -570,13 +648,3 @@ if st.session_state.predictions_made:
     with col4:
         accuracy = max(0, (1 - (mae / df['Close'].mean())) * 100)
         st.metric("Accuracy", f"{accuracy:.1f}%")
-
-# Footer
-st.markdown("---")
-st.markdown(
-    "<div style='text-align:center; color:#FFFFFF; padding:20px;'>"
-    "<p>💡 <b>Disclaimer:</b> This is an educational project. Not financial advice. Always do your own research before investing.</p>"
-    "<p>Built with ❤️ using Python, Streamlit, TensorFlow & Scikit-learn | 100% Free & Open Source</p>"
-    "</div>",
-    unsafe_allow_html=True
-)
