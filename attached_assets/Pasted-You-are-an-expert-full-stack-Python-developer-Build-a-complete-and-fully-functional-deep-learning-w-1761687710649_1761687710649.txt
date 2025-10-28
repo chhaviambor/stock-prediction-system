@@ -1,0 +1,177 @@
+You are an expert full-stack Python developer.
+Build a complete and fully functional deep learning web app project called "Financial Sentiment–Driven Stock Prediction System", using only free APIs and free libraries, which can be run completely free of cost on Replit using Python + HTML + CSS + JS (Flask or Streamlit).
+
+🎯 Project Objective
+
+The system predicts stock price movement (Up/Down) by combining:
+
+Financial news & Reddit post sentiment (NLP)
+
+Historical stock price data (time series)
+It then shows predicted vs actual price graph and sentiment trend visualization.
+
+⚙️ Functional Requirements
+1. Data Collection (Free Sources)
+
+Use yfinance to fetch free historical stock data (Open, Close, High, Low, Volume).
+
+For sentiment data:
+
+Use free news API like NewsAPI (use requests + free key or sample dataset).
+
+OR scrape Reddit finance posts using praw (Reddit API free tier, no paid key needed) or use a small sample dataset to avoid API limits.
+
+2. Deep Learning Model
+
+Use DistilBERT or FinBERT from Hugging Face for financial sentiment analysis (no paid usage).
+
+Use LSTM / BiLSTM in TensorFlow or PyTorch for stock trend prediction (based on price + sentiment).
+
+Allow prediction of next 5–10 days trend (Up/Down).
+
+3. Preprocessing Steps
+
+Clean and preprocess text (remove emojis, punctuation, links).
+
+Tokenize text for the BERT model.
+
+Merge sentiment score with daily stock prices for training.
+
+Normalize data using MinMaxScaler.
+
+4. Frontend (Beautiful + Interactive)
+
+Use Streamlit (preferred) for simplicity and free hosting.
+
+UI should include:
+
+Animated Title/Header
+
+Input field → “Enter Stock Symbol (e.g. AAPL, TSLA, INFY.NS)”
+
+Buttons:
+
+“Fetch Data”
+
+“Predict Trend”
+
+Graphs:
+
+Predicted vs Actual stock prices
+
+Sentiment trend (line chart / pie chart)
+
+Colorful background (gradient or financial theme)
+
+Sidebar with “About Project” and “How It Works” sections.
+
+5. Visualization
+
+Use:
+
+matplotlib or plotly for interactive charts
+
+Sentiment visualization (positive/negative/neutral)
+
+Predicted vs actual price comparison chart
+
+6. Technologies & Libraries
+
+All must be free and open-source:
+
+pip install yfinance transformers torch tensorflow streamlit pandas numpy matplotlib plotly scikit-learn requests
+
+🧩 Folder Structure
+financial_sentiment_stock_predictor/
+│
+├── app.py                   # Main Streamlit/Flask app
+├── sentiment_model.py       # FinBERT / DistilBERT sentiment module
+├── stock_predictor.py       # LSTM-based stock trend model
+├── data/
+│   ├── historical_data.csv
+│   ├── sentiment_data.csv
+│
+├── templates/ (if Flask)
+│   ├── index.html
+│
+├── static/
+│   ├── style.css
+│   ├── scripts.js
+│
+└── requirements.txt
+
+💻 App Behavior (Flow)
+
+User enters a stock symbol (e.g., "AAPL").
+
+App fetches 1-year price data via yfinance.
+
+App collects last week’s news headlines (using free NewsAPI).
+
+Each headline is passed through FinBERT → sentiment score.
+
+LSTM model predicts upcoming stock movement (based on price + sentiment).
+
+App shows:
+
+📈 Predicted vs Actual price line graph
+
+💬 Sentiment score chart
+
+📊 Confidence level of prediction
+
+Clean, attractive Streamlit interface with gradient background and chart animations.
+
+🎨 UI Design Instructions
+
+Use Streamlit themes with gradient background (dark blue/teal or green finance theme).
+
+Use custom CSS (inline or via st.markdown).
+
+Include simple animations (Streamlit st.progress, emoji titles like 💹📊📈).
+
+Example Header:
+
+st.markdown("<h1 style='text-align:center; color:#00FFAA;'>💹 Financial Sentiment–Driven Stock Predictor</h1>", unsafe_allow_html=True)
+
+
+Add "About Section" describing that the model combines NLP (sentiment) and deep learning (LSTM) for smarter stock forecasting.
+
+🚀 Execution & Deployment
+
+Create a new Replit project (Python template).
+
+Copy all generated files into it.
+
+Install dependencies via pip install -r requirements.txt.
+
+Run streamlit run app.py.
+
+The app should open in the Replit web preview window.
+
+🧠 Ensure the Following
+
+No paid API keys or subscriptions.
+
+Include error handling (if API fails, use sample dataset).
+
+Include caching for faster re-runs (@st.cache_data).
+
+Keep the UI mobile-friendly and responsive.
+
+Add comments explaining each function briefly.
+
+🧩 Deliverables Replit AI Should Generate
+
+Full working code (backend + model + frontend)
+
+requirements.txt
+
+Streamlit/Flask-based UI
+
+Attractive visuals and animations
+
+Step-by-step execution guide in comments
+
+Final Note for Replit AI:
+Make everything free, user-friendly, visually beautiful, and ready to run with one click on Replit — no paid API, no missing dataset, no GPU requirement (CPU only).
