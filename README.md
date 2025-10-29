@@ -77,7 +77,7 @@ pip install -r requirements.txt
 # 4️⃣ Run the Streamlit app
 streamlit run app.py
 
-##  🧮 How It Works 
+🧮 How It Works 
 Step 1 — Data Collection
 Stock price data is fetched using Yahoo Finance API.
 Financial news headlines are collected from NewsAPI or web scraping.
